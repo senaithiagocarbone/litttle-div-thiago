@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Sistema de Reservas</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="titulo-container">
+    <h1>Sistema de Reserva de Salas e Laboratórios</h1>
+  </div>
+
+  <form id="reservaForm">
+    <label>Curso:</label>
+    <select id="curso" required>
+      <option value="">Selecione um curso</option>
+      <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
+      <option value="Marcenaria">Marcenaria</option>
+      <option value="Mecânico de Carro">Mecânico de Carro</option>
+      <option value="Mecânico de Caminhão e Carros Grandes">Mecânico de Caminhão e Carros Grandes</option>
+      <option value="Administração">Administração</option>
+      <option value="Logística">Logística</option>
+      <option value="Engenharia Civil">Engenharia Civil</option>
+      <option value="Engenharia de Software">Engenharia de Software</option>
+    </select>
+
+    <label>Professor:</label>
+    <select id="professor" required>
+      <option value="">Selecione o professor</option>
+    </select>
+
+    <label>Turma:</label>
+    <input type="text" id="turma" placeholder="Ex: Turma A" required>
+
+    <label>Data:</label>
+    <input type="date" id="data" required>
+
+    <label>Horário:</label>
+    <input type="time" id="horario" required>
+
+    <button type="submit">Reservar</button>
+  </form>
+
+  <div class="titulo-container">
+    <h2>Relatórios de Cursos</h2>
+  </div>
+
+  <div id="relatorios" class="relatorios-grid"></div>
+
+  <div class="titulo-container">
+    <h2>Tabela de Reservas</h2>
+  </div>
+  <div id="tabelaReservas" class="tabela-reservas"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
