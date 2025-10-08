@@ -10,50 +10,110 @@
     <h1>Sistema de Reserva de Salas e Laboratórios</h1>
   </div>
 
-  <form id="reservaForm">
-    <label>Curso:</label>
-    <select id="curso" required>
-      <option value="">Selecione um curso</option>
-      <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
-      <option value="Marcenaria">Marcenaria</option>
-      <option value="Mecânico de Carro">Mecânico de Carro</option>
-      <option value="Mecânico de Caminhão e Carros Grandes">Mecânico de Caminhão e Carros Grandes</option>
-      <option value="Administração">Administração</option>
-      <option value="Logística">Logística</option>
-      <option value="Engenharia Civil">Engenharia Civil</option>
-      <option value="Engenharia de Software">Engenharia de Software</option>
-    </select>
+  <!-- FORMULÁRIO DE RESERVA -->
+  <section style="margin-bottom: 50px;">
+    <h2>📅 Formulário de Reserva</h2>
+    <form id="reservaForm" style="width:80%; margin:auto;">
+      <label>Curso:</label>
+      <select id="curso" required>
+        <option value="">Selecione um curso</option>
+        <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
+        <option value="Marcenaria">Marcenaria</option>
+        <option value="Mecânico de Carro">Mecânico de Carro</option>
+        <option value="Mecânico de Caminhão e Carros Grandes">Mecânico de Caminhão e Carros Grandes</option>
+        <option value="Administração">Administração</option>
+        <option value="Logística">Logística</option>
+        <option value="Engenharia Civil">Engenharia Civil</option>
+        <option value="Engenharia de Software">Engenharia de Software</option>
+        <option value="Enfermagem">Enfermagem</option>
+        <option value="Inteligência Artificial">Inteligência Artificial</option>
+        <option value="Eletricista de Carro">Eletricista de Carro</option>
+        <option value="Eletricista de Casa">Eletricista de Casa</option>
+        <option value="Chapeador de Carro">Chapeador de Carro</option>
+      </select><br><br>
 
-    <label>Professor:</label>
-    <select id="professor" required>
-      <option value="">Selecione o professor</option>
-    </select>
+      <label>Professor:</label>
+      <select id="professor" required>
+        <option value="">Selecione o professor</option>
+      </select><br><br>
 
-    <label>Turma:</label>
-    <input type="text" id="turma" placeholder="Ex: Turma A" required>
+      <label>Turma:</label>
+      <input type="text" id="turma" placeholder="Ex: Turma A" required><br><br>
 
-    <label>Data:</label>
-    <input type="date" id="data" required>
+      <label>Data:</label>
+      <input type="date" id="data" required><br><br>
 
-    <label>Horário:</label>
-    <input type="time" id="horario" required>
+      <label>Horário:</label>
+      <input type="time" id="horario" required><br><br>
 
-    <button type="submit">Reservar</button>
-  </form>
+      <button type="submit">Reservar</button>
+    </form>
+  </section>
 
-  <div class="titulo-container">
-    <h2>Relatórios de Cursos</h2>
-  </div>
+  <!-- RELATÓRIOS -->
+  <section style="margin-bottom: 50px;">
+    <div class="titulo-container">
+      <h2>📈 Relatórios de Cursos</h2>
+    </div>
+    <div id="relatorios" class="relatorios-grid"></div>
+  </section>
 
-  <div id="relatorios" class="relatorios-grid"></div>
+  <!-- TABELA DE SIGNIFICADOS -->
+  <section style="margin-bottom: 50px;">
+    <h2>📘 Significado de Cada Curso</h2>
+    <table border="1" style="width:80%; margin:auto; text-align:center; border-collapse:collapse;">
+      <tr><th>Curso</th><th>Descrição</th></tr>
+      <tr><td>💻 Desenvolvimento de Sistemas</td><td>Criação e manutenção de softwares e sites.</td></tr>
+      <tr><td>🪚 Marcenaria</td><td>Trabalho com madeira para criar móveis e estruturas.</td></tr>
+      <tr><td>🔧 Mecânico de Carro</td><td>Manutenção e reparo de automóveis.</td></tr>
+      <tr><td>🚛 Mecânico de Caminhão</td><td>Manutenção de caminhões e veículos pesados.</td></tr>
+      <tr><td>📊 Administração</td><td>Gestão de empresas, finanças e recursos humanos.</td></tr>
+      <tr><td>📦 Logística</td><td>Planejamento e transporte de mercadorias.</td></tr>
+      <tr><td>🏗️ Engenharia Civil</td><td>Construção e estruturação de obras e edifícios.</td></tr>
+      <tr><td>💾 Engenharia de Software</td><td>Desenvolvimento avançado de sistemas e aplicações.</td></tr>
+      <tr><td>🏥 Enfermagem</td><td>Cuidado e atendimento à saúde de pacientes.</td></tr>
+      <tr><td>🤖 Inteligência Artificial</td><td>Criação de sistemas inteligentes e automação.</td></tr>
+      <tr><td>⚡ Eletricista de Carro</td><td>Instalação e conserto de partes elétricas de veículos.</td></tr>
+      <tr><td>🏠 Eletricista de Casa</td><td>Instalação e manutenção elétrica residencial.</td></tr>
+      <tr><td>🔩 Chapeador de Carro</td><td>Reparo e modelagem da lataria de veículos.</td></tr>
+    </table>
+  </section>
 
-  <div class="titulo-container">
-    <h2>Tabela de Reservas</h2>
-  </div>
-  <div id="tabelaReservas" class="tabela-reservas"></div>
+  <!-- TABELA DE RESERVAS -->
+  <section style="margin-bottom: 50px;">
+    <div class="titulo-container">
+      <h2>📋 Tabela de Reservas</h2>
+    </div>
+    <div id="tabelaReservas" class="tabela-reservas"></div>
+  </section>
+
+  <!-- CÓDIGO SQL -->
+  <section>
+    <h2>🗄️ Script SQL do Banco de Dados</h2>
+    <pre style="background:#f4f4f4; padding:15px; width:80%; margin:auto; border:1px solid #ccc; border-radius:8px; text-align:left;">
+CREATE OR REPLACE VIEW vw_usage_by_professor AS
+SELECT
+    u.id AS professor_id,
+    u.nome AS professor_nome,
+    COUNT(r.id) AS total_reservas,
+    COALESCE(SUM(TIMESTAMPDIFF(MINUTE, r.data_inicio, r.data_fim))/60.0, 0) AS horas_reservadas
+FROM users u
+LEFT JOIN reservations r 
+    ON r.professor_user_id = u.id 
+    AND r.status_id = 2
+WHERE u.role_id = (
+    SELECT id 
+    FROM roles 
+    WHERE name = 'professor' 
+    LIMIT 1
+)
+GROUP BY u.id;
+    </pre>
+  </section>
 
   <script src="script.js"></script>
 </body>
 </html>
+
 
 
