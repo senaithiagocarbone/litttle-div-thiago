@@ -4,6 +4,108 @@
   <meta charset="UTF-8">
   <title>Sistema de Reservas</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fafafa;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* TÍTULOS PADRÃO */
+    .titulo-container {
+      background: #0078D7; 
+      color: white;
+      border-radius: 12px;
+      padding: 10px 25px;
+      width: fit-content;
+      margin: 30px auto;
+      text-align: center;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+    }
+
+    /* TÍTULO SQL - agora azul como os outros títulos */
+    .titulo-sql {
+      background: #0078D7; /* azul do sistema */
+      color: white;
+      border-radius: 12px;
+      padding: 10px 25px;
+      width: fit-content;
+      margin: 30px auto;
+      text-align: center;
+      box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
+    }
+
+    .titulo-menor {
+      background: #0078D7; 
+      color: white;
+      border-radius: 10px;
+      padding: 6px 18px;
+      width: fit-content;
+      margin: 0 auto 25px;
+      text-align: center;
+      font-size: 18px;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    select, input, button {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #0078D7;
+      color: white;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #005a9e;
+    }
+
+    table {
+      border: 1px solid #ccc;
+      border-collapse: collapse;
+      background-color: white;
+    }
+
+    th {
+      background-color: #0078D7;
+      color: white;
+      padding: 10px;
+    }
+
+    td {
+      padding: 8px;
+    }
+
+    /* SQL moderno colorido */
+    .sql-box {
+      background-color: #1e1e1e;
+      color: white;
+      padding: 15px;
+      width: 80%;
+      margin: auto;
+      border-radius: 8px;
+      font-family: 'Courier New', monospace;
+      overflow-x: auto;
+    }
+
+    .sql-keyword { color: #00ff00; font-weight: bold; } /* Verde claro */
+    .sql-function { color: #00bfff; font-weight: bold; } /* Azul claro */
+    .sql-table { color: #ffd700; font-weight: bold; } /* Amarelo */
+    .sql-column { color: #ffa500; } /* Laranja */
+    .sql-value { color: #ffffff; } /* Branco */
+  </style>
 </head>
 <body>
   <div class="titulo-container">
@@ -12,7 +114,9 @@
 
   <!-- FORMULÁRIO DE RESERVA -->
   <section style="margin-bottom: 50px;">
-    <h2>📅 Formulário de Reserva</h2>
+    <div class="titulo-menor">
+      <h2>📅 Formulário de Reserva</h2>
+    </div>
     <form id="reservaForm" style="width:80%; margin:auto;">
       <label>Curso:</label>
       <select id="curso" required>
@@ -60,8 +164,10 @@
 
   <!-- TABELA DE SIGNIFICADOS -->
   <section style="margin-bottom: 50px;">
-    <h2>📘 Significado de Cada Curso</h2>
-    <table border="1" style="width:80%; margin:auto; text-align:center; border-collapse:collapse;">
+    <div class="titulo-container">
+      <h2>📘 Significado de Cada Curso</h2>
+    </div>
+    <table border="1" style="width:80%; margin:auto; text-align:center;">
       <tr><th>Curso</th><th>Descrição</th></tr>
       <tr><td>💻 Desenvolvimento de Sistemas</td><td>Criação e manutenção de softwares e sites.</td></tr>
       <tr><td>🪚 Marcenaria</td><td>Trabalho com madeira para criar móveis e estruturas.</td></tr>
@@ -87,33 +193,32 @@
     <div id="tabelaReservas" class="tabela-reservas"></div>
   </section>
 
-  <!-- CÓDIGO SQL -->
-  <section>
-    <h2>🗄️ Script SQL do Banco de Dados</h2>
-    <pre style="background:#f4f4f4; padding:15px; width:80%; margin:auto; border:1px solid #ccc; border-radius:8px; text-align:left;">
-CREATE OR REPLACE VIEW vw_usage_by_professor AS
-SELECT
-    u.id AS professor_id,
-    u.nome AS professor_nome,
-    COUNT(r.id) AS total_reservas,
-    COALESCE(SUM(TIMESTAMPDIFF(MINUTE, r.data_inicio, r.data_fim))/60.0, 0) AS horas_reservadas
-FROM users u
-LEFT JOIN reservations r 
-    ON r.professor_user_id = u.id 
-    AND r.status_id = 2
-WHERE u.role_id = (
-    SELECT id 
-    FROM roles 
-    WHERE name = 'professor' 
-    LIMIT 1
-)
-GROUP BY u.id;
-    </pre>
+  <!-- SQL COLORIDO -->
+  <section style="margin-bottom: 50px;">
+    <div class="titulo-sql">
+      <h2>🗄️ Script SQL do Banco de Dados</h2>
+    </div>
+    <div class="sql-box">
+      <span class="sql-keyword">CREATE OR REPLACE VIEW</span> <span class="sql-table">vw_usage_by_professor</span> <span class="sql-keyword">AS</span><br>
+      <span class="sql-keyword">SELECT</span><br>
+      &nbsp;&nbsp;<span class="sql-column">u.id</span> <span class="sql-keyword">AS</span> <span class="sql-column">professor_id</span>,<br>
+      &nbsp;&nbsp;<span class="sql-column">u.nome</span> <span class="sql-keyword">AS</span> <span class="sql-column">professor_nome</span>,<br>
+      &nbsp;&nbsp;<span class="sql-function">COUNT</span>(<span class="sql-column">r.id</span>) <span class="sql-keyword">AS</span> <span class="sql-column">total_reservas</span>,<br>
+      &nbsp;&nbsp;<span class="sql-function">COALESCE</span>(<span class="sql-function">SUM</span>(<span class="sql-function">TIMESTAMPDIFF</span>(MINUTE, <span class="sql-column">r.data_inicio</span>, <span class="sql-column">r.data_fim</span>))/60.0, 0) <span class="sql-keyword">AS</span> <span class="sql-column">horas_reservadas</span><br>
+      <span class="sql-keyword">FROM</span> <span class="sql-table">users</span> <span class="sql-keyword">u</span><br>
+      <span class="sql-keyword">LEFT JOIN</span> <span class="sql-table">reservations</span> <span class="sql-keyword">r</span><br>
+      &nbsp;&nbsp;<span class="sql-keyword">ON</span> <span class="sql-column">r.professor_user_id</span> = <span class="sql-column">u.id</span><br>
+      &nbsp;&nbsp;<span class="sql-keyword">AND</span> <span class="sql-column">r.status_id</span> = 2<br>
+      <span class="sql-keyword">WHERE</span> <span class="sql-column">u.role_id</span> = (<br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">SELECT</span> <span class="sql-column">id</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">FROM</span> <span class="sql-table">roles</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">WHERE</span> <span class="sql-column">name</span> = <span class="sql-value">'professor'</span><br>
+      &nbsp;&nbsp;&nbsp;&nbsp;<span class="sql-keyword">LIMIT</span> 1<br>
+      )<br>
+      <span class="sql-keyword">GROUP BY</span> <span class="sql-column">u.id</span>;
+    </div>
   </section>
 
   <script src="script.js"></script>
 </body>
 </html>
-
-
-
