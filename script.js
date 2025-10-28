@@ -1,176 +1,152 @@
-const cursos = {
-  "Desenvolvimento de Sistemas": {
-    vagas: 50,
-    matriculados: 32,
-    professores: [
-      { nome: "Ricardo", dias: "Segunda e Terça", atividade: "Escrever" },
-      { nome: "Osnir", dias: "Quarta-feira", atividade: "Banco de Dados" },
-      { nome: "Luciana", dias: "Quinta-feira", atividade: "Visual Studio Code" },
-      { nome: "Luciano", dias: "Sexta-feira", atividade: "Eletricidade do Computador" }
-    ]
-  },
-  "Marcenaria": {
-    vagas: 40,
-    matriculados: 20,
-    professores: [
-      { nome: "Maycon", dias: "Segunda", atividade: "Escrever e Desenhar" },
-      { nome: "Alex", dias: "Terça", atividade: "Cortar Madeiras" },
-      { nome: "Diego", dias: "Quarta", atividade: "Montar Coisas" },
-      { nome: "Cleber", dias: "Quinta", atividade: "Arrumar e Afiar Ferramenta" },
-      { nome: "Sebastiana", dias: "Quinta e Sexta", atividade: "Criar Coisa Artesanal" }
-    ]
-  },
-  "Mecânico de Carro": {
-    vagas: 30,
-    matriculados: 15,
-    professores: [
-      { nome: "Richard", dias: "Segunda", atividade: "Escrever e Fazer Contas" },
-      { nome: "Darci", dias: "Terça", atividade: "Desmontar e Arrumar" },
-      { nome: "Luci", dias: "Quarta", atividade: "Montar e Colocar no Lugar" },
-      { nome: "Ruy", dias: "Quinta, Sexta e Sábado", atividade: "Colocar no Lugar" }
-    ]
-  },
-  "Mecânico de Caminhão e Carros Grandes": {
-    vagas: 25,
-    matriculados: 10,
-    professores: [
-      { nome: "Felipe", dias: "Segunda", atividade: "Escrever e Desenhar" },
-      { nome: "Gustavo", dias: "Terça e Quarta", atividade: "Desmontar e Arrumar" },
-      { nome: "Delci", dias: "Quarta e Quinta", atividade: "Montar e Ver se Está Funcionando" },
-      { nome: "Jona", dias: "Sexta e Sábado", atividade: "Colocar no Lugar e Ver se Deu Certo" }
-    ]
-  },
-  "Administração": {
-    vagas: 60,
-    matriculados: 45,
-    professores: [
-      { nome: "João Pedro", dias: "Segunda", atividade: "Escrever" },
-      { nome: "Pedro Roberto", dias: "Terça e Quarta", atividade: "Mexer com Dinheiro" },
-      { nome: "Carlos", dias: "Quinta", atividade: "Mexer no Computador" },
-      { nome: "Lucimara", dias: "Sexta", atividade: "Ver Empresas" }
-    ]
-  },
-  "Logística": {
-    vagas: 35,
-    matriculados: 25,
-    professores: [
-      { nome: "Chico", dias: "Segunda e Terça", atividade: "Escrever" },
-      { nome: "Bento", dias: "Quarta", atividade: "Fazer Contas" },
-      { nome: "Francisco", dias: "Quinta", atividade: "Pesagem" },
-      { nome: "Maria", dias: "Sexta", atividade: "Desenhar e Falar" }
-    ]
-  },
-  "Engenharia Civil": {
-    vagas: 45,
-    matriculados: 38,
-    professores: [
-      { nome: "Francisca", dias: "Segunda", atividade: "Desenhar e Escrever" },
-      { nome: "Marinalva", dias: "Terça e Quarta", atividade: "Montar" },
-      { nome: "Higor", dias: "Quinta", atividade: "Falar e Fazer Contas" },
-      { nome: "Ana Caroline", dias: "Sexta", atividade: "Montar e Falar se Ficou Bom" }
-    ]
-  },
-  "Engenharia de Software": {
-    vagas: 50,
-    matriculados: 40,
-    professores: [
-      { nome: "Rafael", dias: "Segunda", atividade: "Escrever e Falar" },
-      { nome: "Roberto", dias: "Terça", atividade: "Mexer no Computador" },
-      { nome: "Alexandre", dias: "Quarta e Quinta", atividade: "Criar Coisa" },
-      { nome: "Claudio", dias: "Sexta", atividade: "Eletricidade do Computador" }
-    ]
+// MOSTRAR SEÇÕES
+function mostrar(secao) {
+  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
+  document.getElementById(secao).classList.add('active');
+
+  const descricao = document.getElementById('descricaoBotao');
+  switch (secao) {
+    case 'formulario':
+      descricao.textContent = '🗓️ Este botão abre o formulário para registrar novas reservas de sala.';
+      break;
+    case 'relatorios':
+      descricao.textContent = '📊 Este botão mostra os relatórios e estatísticas dos cursos.';
+      renderizarGrafico();
+      break;
+    case 'significados':
+      descricao.textContent = '📚 Este botão exibe o significado e a descrição de cada curso.';
+      break;
+    case 'tabela':
+      descricao.textContent = '📅 Este botão mostra todas as reservas já registradas.';
+      atualizarTabela();
+      break;
+    case 'config':
+      descricao.textContent = '⚙️ Este botão abre as configurações do sistema.';
+      document.getElementById('sqlPainel').classList.add('show');
+      break;
   }
+}
+
+// DADOS DOS CURSOS
+const dadosCursos = {
+  "Desenvolvimento de Sistemas": {prof: "Ricardo", turma:"A", bloco:"1", sala:"101", data:"2025-11-01", horario:"09:00"},
+  "Marcenaria": {prof: "Ana", turma:"B", bloco:"2", sala:"202", data:"2025-11-02", horario:"10:00"},
+  "Mecânico de Carro": {prof: "Lucas", turma:"C", bloco:"1", sala:"103", data:"2025-11-03", horario:"11:00"},
+  "Mecânico de Caminhão e Carros Grandes": {prof: "Carlos", turma:"D", bloco:"2", sala:"204", data:"2025-11-04", horario:"13:00"},
+  "Administração": {prof: "Sofia", turma:"E", bloco:"3", sala:"301", data:"2025-11-05", horario:"14:00"},
+  "Logística": {prof: "Matheus", turma:"F", bloco:"3", sala:"302", data:"2025-11-06", horario:"08:00"},
+  "Engenharia Civil": {prof: "Roberto", turma:"G", bloco:"4", sala:"401", data:"2025-11-07", horario:"09:30"},
+  "Engenharia de Software": {prof: "Gabriel", turma:"H", bloco:"4", sala:"402", data:"2025-11-08", horario:"10:30"},
+  "Enfermagem": {prof: "Mariana", turma:"I", bloco:"5", sala:"501", data:"2025-11-09", horario:"12:00"},
+  "Inteligência Artificial": {prof: "Eduardo", turma:"J", bloco:"5", sala:"502", data:"2025-11-10", horario:"13:30"},
+  "Eletricista de Carro": {prof: "Fábio", turma:"K", bloco:"6", sala:"601", data:"2025-11-11", horario:"08:30"},
+  "Eletricista de Casa": {prof: "Paulo", turma:"L", bloco:"6", sala:"602", data:"2025-11-12", horario:"09:15"},
+  "Chapeador de Carro": {prof: "Rafael", turma:"M", bloco:"7", sala:"701", data:"2025-11-13", horario:"10:45"}
 };
 
-let reservas = JSON.parse(localStorage.getItem("reservas")) || [];
-
-document.getElementById("curso").addEventListener("change", function () {
-  const curso = this.value;
-  const profSelect = document.getElementById("professor");
-  profSelect.innerHTML = "<option value=''>Selecione o professor</option>";
-
-  if (cursos[curso]) {
-    cursos[curso].professores.forEach(p => {
-      let opt = document.createElement("option");
-      opt.value = p.nome;
-      opt.textContent = `${p.nome} (${p.dias} - ${p.atividade})`;
-      profSelect.appendChild(opt);
-    });
+// FORMULÁRIO AUTOMÁTICO
+const cursoSelect = document.getElementById("curso");
+cursoSelect.addEventListener("change", () => {
+  const curso = cursoSelect.value;
+  if (dadosCursos[curso]) {
+    document.getElementById("professor").value = dadosCursos[curso].prof;
+    document.getElementById("turma").value = dadosCursos[curso].turma;
+    document.getElementById("bloco").value = dadosCursos[curso].bloco;
+    document.getElementById("sala").value = dadosCursos[curso].sala;
+    document.getElementById("data").value = dadosCursos[curso].data;
+    document.getElementById("horario").value = dadosCursos[curso].horario;
+  } else {
+    document.getElementById("professor").value = "";
+    document.getElementById("turma").value = "";
+    document.getElementById("bloco").value = "";
+    document.getElementById("sala").value = "";
+    document.getElementById("data").value = "";
+    document.getElementById("horario").value = "";
   }
 });
 
-document.getElementById("reservaForm").addEventListener("submit", function (e) {
+// RESERVAS
+let reservas = [];
+
+// ENVIO DO FORMULÁRIO
+document.getElementById("reservaForm").addEventListener("submit", function(e){
   e.preventDefault();
+  const curso = cursoSelect.value;
+  if (!curso) return;
+  const prof = document.getElementById("professor").value;
+  const turma = document.getElementById("turma").value;
+  const bloco = document.getElementById("bloco").value;
+  const sala = document.getElementById("sala").value;
+  const data = document.getElementById("data").value;
+  const horario = document.getElementById("horario").value;
 
-  const novaReserva = {
-    curso: document.getElementById("curso").value,
-    professor: document.getElementById("professor").value,
-    turma: document.getElementById("turma").value,
-    data: document.getElementById("data").value,
-    horario: document.getElementById("horario").value
-  };
-
-  reservas.push(novaReserva);
-  localStorage.setItem("reservas", JSON.stringify(reservas));
-  carregarRelatorios();
-  carregarTabelaReservas();
+  reservas.push({curso, prof, turma, bloco, sala, data, horario});
+  atualizarTabela();
+  alert("Reserva registrada com sucesso!");
+  document.getElementById("reservaForm").reset();
 });
 
-function carregarRelatorios() {
-  const relDiv = document.getElementById("relatorios");
-  relDiv.innerHTML = "";
-
-  Object.keys(cursos).forEach(cursoNome => {
-    const curso = cursos[cursoNome];
-    const ocupacao = Math.round((curso.matriculados / curso.vagas) * 100);
-
-    let cor = "green";
-    if (ocupacao > 60 && ocupacao <= 80) cor = "orange";
-    if (ocupacao > 80) cor = "red";
-
-    const card = document.createElement("div");
-    card.className = "relat-card";
-    card.innerHTML = `
-      <h3>${cursoNome}</h3>
-      <p><strong>Matriculados:</strong> ${curso.matriculados}</p>
-      <p><strong>Vagas restantes:</strong> ${curso.vagas - curso.matriculados}</p>
-      <div class="progress">
-        <div class="progress-bar" style="width:${ocupacao}%; background:${cor};">
-          ${ocupacao}%
-        </div>
-      </div>
-      <h4>Professores:</h4>
-      <ul>
-        ${curso.professores.map(p => `
-          <li>
-            <span class="professor-tag professor-${p.nome.replace(/\s/g,'')}">${p.nome} - ${p.dias} (${p.atividade})</span>
-          </li>`).join("")}
-      </ul>
-    `;
-    relDiv.appendChild(card);
-  });
-}
-
-function carregarTabelaReservas() {
-  const tabelaDiv = document.getElementById("tabelaReservas");
-  tabelaDiv.innerHTML = "";
-
-  let tabelaHTML = `<table>
-    <tr>
-      <th>Curso</th><th>Professor</th><th>Turma</th><th>Data</th><th>Horário</th>
-    </tr>`;
+// ATUALIZAR TABELA
+function atualizarTabela() {
+  const tabela = document.getElementById("tabelaReservas");
+  tabela.innerHTML = "<tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>";
   reservas.forEach(r => {
-    tabelaHTML += `<tr>
-      <td>${r.curso}</td>
-      <td>${r.professor}</td>
-      <td>${r.turma}</td>
-      <td>${r.data}</td>
-      <td>${r.horario}</td>
-    </tr>`;
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${r.curso}</td><td>${r.prof}</td><td>${r.turma}</td><td>${r.bloco}</td><td>${r.sala}</td><td>${r.data}</td><td>${r.horario}</td>`;
+    tabela.appendChild(tr);
   });
-  tabelaHTML += "</table>";
-  tabelaDiv.innerHTML = tabelaHTML;
+  popularFiltro();
 }
 
-carregarRelatorios();
-carregarTabelaReservas();
+// FILTRO
+function popularFiltro() {
+  const filtro = document.getElementById("filtroCurso");
+  filtro.innerHTML = '<option value="">Todos os cursos</option>';
+  const cursosUnicos = [...new Set(reservas.map(r => r.curso))];
+  cursosUnicos.forEach(c => {
+    const opt = document.createElement("option");
+    opt.value = c;
+    opt.textContent = c;
+    filtro.appendChild(opt);
+  });
+}
+
+function aplicarFiltro() {
+  const cursoFiltro = document.getElementById("filtroCurso").value;
+  const dataFiltro = document.getElementById("filtroData").value;
+  const tabela = document.getElementById("tabelaReservas");
+  tabela.innerHTML = "<tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>";
+
+  reservas.filter(r => {
+    return (!cursoFiltro || r.curso === cursoFiltro) && (!dataFiltro || r.data === dataFiltro);
+  }).forEach(r => {
+    const tr = document.createElement("tr");
+    tr.innerHTML = `<td>${r.curso}</td><td>${r.prof}</td><td>${r.turma}</td><td>${r.bloco}</td><td>${r.sala}</td><td>${r.data}</td><td>${r.horario}</td>`;
+    tabela.appendChild(tr);
+  });
+}
+
+function limparFiltro() {
+  document.getElementById("filtroCurso").value = "";
+  document.getElementById("filtroData").value = "";
+  atualizarTabela();
+}
+
+// AJUSTE DE FONTE
+let tamanhoFonte = 16;
+function aumentarFonte() { tamanhoFonte += 2; document.body.style.fontSize = tamanhoFonte + "px"; }
+function diminuirFonte() { if (tamanhoFonte > 10) { tamanhoFonte -= 2; document.body.style.fontSize = tamanhoFonte + "px"; } }
+
+// GRÁFICO SIMPLES RELATÓRIOS
+function renderizarGrafico() {
+  const rel = document.getElementById("relatoriosConteudo");
+  const resumo = {};
+  reservas.forEach(r => {
+    resumo[r.curso] = (resumo[r.curso] || 0) + 1;
+  });
+  let html = "<h3 style='text-align:center;'>Número de Reservas por Curso</h3><ul>";
+  for (const curso in resumo) {
+    html += `<li>${curso}: ${resumo[curso]}</li>`;
+  }
+  html += "</ul>";
+  rel.innerHTML = html;
+}

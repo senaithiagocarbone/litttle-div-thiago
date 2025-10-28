@@ -3,163 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Sistema de Reservas</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #fafafa;
-      margin: 0;
-      padding: 0;
-    }
-
-    /* TÍTULO PRINCIPAL */
-    .titulo-container {
-      background: #0078D7;
-      color: white;
-      border-radius: 12px;
-      padding: 10px 25px;
-      width: fit-content;
-      margin: 30px auto;
-      text-align: center;
-      box-shadow: 3px 3px 10px rgba(0,0,0,0.15);
-    }
-
-    /* RETÂNGULO AZUL ACIMA DO MENU */
-    .retangulo-azul {
-      position: fixed;
-      top: 80px;
-      left: 20px;
-      width: 240px;
-      height: 60px;
-      background-color: #0078D7;
-      border-radius: 12px;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .retangulo-azul h2 {
-      color: white;
-      font-size: 18px;
-      margin: 0;
-      text-align: center;
-    }
-
-    /* MENU LATERAL */
-    .menu-lateral {
-      position: fixed;
-      top: 160px; /* abaixo do retângulo */
-      left: 20px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .menu-lateral button {
-      background-color: #0078D7;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 2px 2px 6px rgba(0,0,0,0.2);
-      transition: 0.3s;
-      width: 240px;
-      text-align: left;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 14px;
-    }
-
-    .menu-lateral button:hover {
-      background-color: #005a9e;
-      transform: scale(1.05);
-    }
-
-    section {
-      display: none;
-      padding-left: 300px; /* espaço para o menu lateral */
-      padding-right: 50px;
-      margin-bottom: 60px;
-    }
-
-    section.active {
-      display: block;
-    }
-
-    .titulo-menor {
-      background: #0078D7; 
-      color: white;
-      border-radius: 10px;
-      padding: 6px 18px;
-      width: fit-content;
-      margin: 0 auto 25px;
-      text-align: center;
-      font-size: 18px;
-      box-shadow: 2px 2px 8px rgba(0,0,0,0.15);
-    }
-
-    label { font-weight: bold; }
-
-    select, input, button[type="submit"] {
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      width: 100%;
-      box-sizing: border-box;
-    }
-
-    button[type="submit"] {
-      background-color: #0078D7;
-      color: white;
-      border: none;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button[type="submit"]:hover {
-      background-color: #005a9e;
-    }
-
-    table {
-      border: 1px solid #ccc;
-      border-collapse: collapse;
-      background-color: white;
-      width: 80%;
-      margin: auto;
-      text-align: center;
-    }
-
-    th {
-      background-color: #0078D7;
-      color: white;
-      padding: 10px;
-    }
-
-    td { padding: 8px; }
-
-    /* SIGNIFICADO DOS BOTÕES */
-    .significado {
-      margin-left: 300px;
-      margin-top: 20px;
-      background: #e6f0ff;
-      border-left: 5px solid #0078D7;
-      padding: 10px 15px;
-      border-radius: 8px;
-      width: fit-content;
-      font-size: 14px;
-      box-shadow: 1px 1px 4px rgba(0,0,0,0.2);
-    }
-
-    /* ÍCONES dos botões */
-    .menu-lateral img {
-      width: 20px;
-      height: 20px;
-    }
-
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <div class="titulo-container">
@@ -184,6 +28,9 @@
     </button>
     <button onclick="mostrar('tabela')">
       <img src="https://img.icons8.com/ios-filled/50/ffffff/task.png"/> Tabela de Reservas
+    </button>
+    <button onclick="mostrar('config')">
+      <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png"/> Configurações
     </button>
   </div>
 
@@ -224,6 +71,12 @@
       <label>Turma:</label>
       <input type="text" id="turma" placeholder="Ex: Turma A" required><br><br>
 
+      <label>Bloco:</label>
+      <input type="text" id="bloco" placeholder="Ex: Bloco 1" required><br><br>
+
+      <label>Sala:</label>
+      <input type="text" id="sala" placeholder="Ex: Sala 101" required><br><br>
+
       <label>Data:</label>
       <input type="date" id="data" required><br><br>
 
@@ -252,18 +105,18 @@
     <table>
       <tr><th>Curso</th><th>Descrição</th></tr>
       <tr><td>💻 Desenvolvimento de Sistemas</td><td>Criação e manutenção de softwares e sites.</td></tr>
-      <tr><td>🪚 Marcenaria</td><td>Trabalho com madeira para criar móveis e estruturas.</td></tr>
-      <tr><td>🔧 Mecânico de Carro</td><td>Manutenção e reparo de automóveis.</td></tr>
-      <tr><td>🚛 Mecânico de Caminhão</td><td>Manutenção de caminhões e veículos pesados.</td></tr>
-      <tr><td>📊 Administração</td><td>Gestão de empresas, finanças e recursos humanos.</td></tr>
+      <tr><td>🛠️ Marcenaria</td><td>Trabalhos manuais em madeira e móveis.</td></tr>
+      <tr><td>🚗 Mecânico de Carro</td><td>Manutenção e reparo de carros.</td></tr>
+      <tr><td>🚚 Mecânico de Caminhão e Carros Grandes</td><td>Manutenção de veículos pesados.</td></tr>
+      <tr><td>📊 Administração</td><td>Gestão de empresas, finanças e RH.</td></tr>
       <tr><td>📦 Logística</td><td>Planejamento e transporte de mercadorias.</td></tr>
       <tr><td>🏗️ Engenharia Civil</td><td>Construção e estruturação de obras e edifícios.</td></tr>
       <tr><td>💾 Engenharia de Software</td><td>Desenvolvimento avançado de sistemas e aplicações.</td></tr>
-      <tr><td>🏥 Enfermagem</td><td>Cuidado e atendimento à saúde de pacientes.</td></tr>
+      <tr><td>🩺 Enfermagem</td><td>Cuidados e assistência de saúde.</td></tr>
       <tr><td>🤖 Inteligência Artificial</td><td>Criação de sistemas inteligentes e automação.</td></tr>
-      <tr><td>⚡ Eletricista de Carro</td><td>Instalação e conserto de partes elétricas de veículos.</td></tr>
-      <tr><td>🏠 Eletricista de Casa</td><td>Instalação e manutenção elétrica residencial.</td></tr>
-      <tr><td>🔩 Chapeador de Carro</td><td>Reparo e modelagem da lataria de veículos.</td></tr>
+      <tr><td>🔌 Eletricista de Carro</td><td>Instalação e manutenção elétrica em veículos.</td></tr>
+      <tr><td>🔌 Eletricista de Casa</td><td>Instalação e manutenção elétrica residencial.</td></tr>
+      <tr><td>🔧 Chapeador de Carro</td><td>Reparo e pintura de carros.</td></tr>
     </table>
   </section>
 
@@ -272,67 +125,54 @@
     <div class="titulo-container">
       <h2>📋 Tabela de Reservas</h2>
     </div>
-    <table>
-      <tr><th>Curso</th><th>Professor</th><th>Data</th><th>Horário</th></tr>
-      <tr><td>Desenvolvimento de Sistemas</td><td>Ricardo</td><td>2025-10-25</td><td>09:00</td></tr>
-      <tr><td>Administração</td><td>Marcos</td><td>2025-10-27</td><td>14:00</td></tr>
+
+    <div style="width:80%; margin:auto; display:flex; gap:10px; margin-bottom:10px;">
+      <select id="filtroCurso"></select>
+      <input type="date" id="filtroData"/>
+      <button onclick="aplicarFiltro()">Filtrar</button>
+      <button onclick="limparFiltro()">Limpar</button>
+    </div>
+
+    <table id="tabelaReservas">
+      <tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>
     </table>
   </section>
 
-  <script>
-    function mostrar(secao) {
-      document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-      document.getElementById(secao).classList.add('active');
+  <!-- CONFIGURAÇÕES -->
+  <section id="config">
+    <div class="titulo-container">
+      <h2>⚙️ Configurações do Sistema</h2>
+    </div>
 
-      const descricao = document.getElementById('descricaoBotao');
-      switch (secao) {
-        case 'formulario':
-          descricao.textContent = '🗓️ Este botão abre o formulário para registrar novas reservas de sala.';
-          break;
-        case 'relatorios':
-          descricao.textContent = '📊 Este botão mostra os relatórios e estatísticas dos cursos.';
-          break;
-        case 'significados':
-          descricao.textContent = '📚 Este botão exibe o significado e a descrição de cada curso.';
-          break;
-        case 'tabela':
-          descricao.textContent = '📅 Este botão mostra todas as reservas já registradas.';
-          break;
-      }
-    }
+    <div class="config-opcoes">
+      <button onclick="aumentarFonte()">Aumentar Letras 🔍</button>
+      <button onclick="diminuirFonte()">Diminuir Letras 🔽</button>
+    </div>
 
-    // Exemplo de professores por curso
-    const professoresPorCurso = {
-      "Desenvolvimento de Sistemas": ["Ricardo", "Osnir"],
-      "Marcenaria": ["Carlos", "João"],
-      "Mecânico de Carro": ["Marcos", "Paulo"],
-      "Mecânico de Caminhão e Carros Grandes": ["Júlio", "Rafael"],
-      "Administração": ["Ana", "Sofia"],
-      "Logística": ["Lucas", "Matheus"],
-      "Engenharia Civil": ["Roberto", "Fernanda"],
-      "Engenharia de Software": ["Gabriel", "Thiago"],
-      "Enfermagem": ["Camila", "Beatriz"],
-      "Inteligência Artificial": ["Eduardo", "Mariana"],
-      "Eletricista de Carro": ["Fernando", "Bruno"],
-      "Eletricista de Casa": ["Paulo", "André"],
-      "Chapeador de Carro": ["Fábio", "Diego"]
-    };
+    <!-- Painel SQL -->
+    <div class="sql-box" id="sqlPainel">
+      <pre>
+CREATE OR REPLACE VIEW vw_usage_by_professor AS
+SELECT
+    u.id AS professor_id,
+    u.nome AS professor_nome,
+    COUNT(r.id) AS total_reservas,
+    COALESCE(SUM(TIMESTAMPDIFF(MINUTE, r.data_inicio, r.data_fim))/60.0, 0) AS horas_reservadas
+FROM users u
+LEFT JOIN reservations r
+    ON r.professor_user_id = u.id
+    AND r.status_id = 2
+WHERE u.role_id = (
+    SELECT id
+    FROM roles
+    WHERE name = 'professor'
+    LIMIT 1
+)
+GROUP BY u.id;
+      </pre>
+    </div>
+  </section>
 
-    const cursoSelect = document.getElementById("curso");
-    const professorSelect = document.getElementById("professor");
-
-    cursoSelect.addEventListener("change", () => {
-      professorSelect.innerHTML = '<option value="">Selecione o professor</option>';
-      const curso = cursoSelect.value;
-      if (professoresPorCurso[curso]) {
-        professoresPorCurso[curso].forEach(prof => {
-          const option = document.createElement("option");
-          option.value = prof;
-          option.textContent = prof;
-          professorSelect.appendChild(option);
-        });
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>
