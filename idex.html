@@ -6,152 +6,135 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <div class="titulo-container">
+  <header class="titulo-container">
     <h1>Sistema de Reserva de Salas e Laboratórios</h1>
-  </div>
+  </header>
 
-  <!-- RETÂNGULO AZUL -->
-  <div class="retangulo-azul">
-    <h2>Menu do Sistema</h2>
-  </div>
+  <!-- CONTAINER PRINCIPAL -->
+  <div class="container">
 
-  <!-- MENU LATERAL COM BOTÕES -->
-  <div class="menu-lateral">
-    <button onclick="mostrar('formulario')">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/calendar.png"/> Formulário de Reserva
-    </button>
-    <button onclick="mostrar('relatorios')">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/combo-chart.png"/> Relatórios de Cursos
-    </button>
-    <button onclick="mostrar('significados')">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/book.png"/> Significado de Cada Curso
-    </button>
-    <button onclick="mostrar('tabela')">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/task.png"/> Tabela de Reservas
-    </button>
-    <button onclick="mostrar('config')">
-      <img src="https://img.icons8.com/ios-filled/50/ffffff/settings.png"/> Configurações
-    </button>
-  </div>
+    <!-- MENU LATERAL -->
+    <aside class="menu-lateral">
+      <div class="retangulo-azul"></div>
+      <h2>Menu do Sistema</h2>
+      <button onclick="mostrar('formulario')">
+        🗓️ Formulário de Reserva
+      </button>
+      <button onclick="mostrar('relatorios')">
+        📊 Relatórios de Cursos
+      </button>
+      <button onclick="mostrar('significados')">
+        📘 Significado de Cada Curso
+      </button>
+      <button onclick="mostrar('tabela')">
+        📋 Tabela de Reservas
+      </button>
+      <button onclick="mostrar('config')">
+        ⚙️ Configurações
+      </button>
+    </aside>
 
-  <!-- SIGNIFICADO DOS BOTÕES -->
-  <div class="significado" id="descricaoBotao">
-    Clique em um botão para ver o conteúdo correspondente.
-  </div>
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main class="conteudo">
 
-  <!-- FORMULÁRIO DE RESERVA -->
-  <section id="formulario" class="active">
-    <div class="titulo-menor">
-      <h2>📅 Formulário de Reserva</h2>
-    </div>
-    <form id="reservaForm" style="width:80%; margin:auto;">
-      <label>Curso:</label>
-      <select id="curso" required>
-        <option value="">Selecione um curso</option>
-        <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
-        <option value="Marcenaria">Marcenaria</option>
-        <option value="Mecânico de Carro">Mecânico de Carro</option>
-        <option value="Mecânico de Caminhão e Carros Grandes">Mecânico de Caminhão e Carros Grandes</option>
-        <option value="Administração">Administração</option>
-        <option value="Logística">Logística</option>
-        <option value="Engenharia Civil">Engenharia Civil</option>
-        <option value="Engenharia de Software">Engenharia de Software</option>
-        <option value="Enfermagem">Enfermagem</option>
-        <option value="Inteligência Artificial">Inteligência Artificial</option>
-        <option value="Eletricista de Carro">Eletricista de Carro</option>
-        <option value="Eletricista de Casa">Eletricista de Casa</option>
-        <option value="Chapeador de Carro">Chapeador de Carro</option>
-      </select><br><br>
+      <!-- FORMULÁRIO DE RESERVA -->
+      <section id="formulario" class="ativo">
+        <h2>📅 Formulário de Reserva</h2>
+        <form id="reservaForm">
+          <label>Curso:</label>
+          <select id="curso" required>
+            <option value="">Selecione um curso</option>
+            <option value="Desenvolvimento de Sistemas">Desenvolvimento de Sistemas</option>
+            <option value="Marcenaria">Marcenaria</option>
+            <option value="Mecânico de Carro">Mecânico de Carro</option>
+            <option value="Mecânico de Caminhão e Carros Grandes">Mecânico de Caminhão e Carros Grandes</option>
+            <option value="Administração">Administração</option>
+            <option value="Logística">Logística</option>
+            <option value="Engenharia Civil">Engenharia Civil</option>
+            <option value="Engenharia de Software">Engenharia de Software</option>
+            <option value="Enfermagem">Enfermagem</option>
+            <option value="Inteligência Artificial">Inteligência Artificial</option>
+            <option value="Eletricista de Carro">Eletricista de Carro</option>
+            <option value="Eletricista de Casa">Eletricista de Casa</option>
+            <option value="Chapeador de Carro">Chapeador de Carro</option>
+          </select>
 
-      <label>Professor:</label>
-      <select id="professor" required>
-        <option value="">Selecione o professor</option>
-      </select><br><br>
+          <label>Professor:</label>
+          <select id="professor" required>
+            <option value="">Selecione o professor</option>
+          </select>
 
-      <label>Turma:</label>
-      <input type="text" id="turma" placeholder="Ex: Turma A" required><br><br>
+          <label>Turma:</label>
+          <input type="text" id="turma" placeholder="Ex: Turma A" required>
 
-      <label>Bloco:</label>
-      <input type="text" id="bloco" placeholder="Ex: Bloco 1" required><br><br>
+          <label>Bloco:</label>
+          <input type="text" id="bloco" placeholder="Ex: Bloco 1" required>
 
-      <label>Sala:</label>
-      <input type="text" id="sala" placeholder="Ex: Sala 101" required><br><br>
+          <label>Sala:</label>
+          <input type="text" id="sala" placeholder="Ex: Sala 101" required>
 
-      <label>Data:</label>
-      <input type="date" id="data" required><br><br>
+          <label>Data:</label>
+          <input type="date" id="data" required>
 
-      <label>Horário:</label>
-      <input type="time" id="horario" required><br><br>
+          <label>Horário:</label>
+          <input type="time" id="horario" required>
 
-      <button type="submit">Reservar</button>
-    </form>
-  </section>
+          <button type="submit">Reservar</button>
+        </form>
+      </section>
 
-  <!-- RELATÓRIOS -->
-  <section id="relatorios">
-    <div class="titulo-container">
-      <h2>📈 Relatórios de Cursos</h2>
-    </div>
-    <div id="relatoriosConteudo">
-      <p style="text-align:center;">Aqui você pode visualizar estatísticas e dados dos cursos.</p>
-    </div>
-  </section>
+      <!-- RELATÓRIOS -->
+      <section id="relatorios">
+        <h2>📈 Relatórios de Cursos</h2>
+        <p>Aqui você pode visualizar estatísticas e dados dos cursos.</p>
+      </section>
 
-  <!-- SIGNIFICADOS -->
-  <section id="significados">
-    <div class="titulo-container">
-      <h2>📘 Significado de Cada Curso</h2>
-    </div>
-    <table>
-      <tr><th>Curso</th><th>Descrição</th></tr>
-      <tr><td>💻 Desenvolvimento de Sistemas</td><td>Criação e manutenção de softwares e sites.</td></tr>
-      <tr><td>🛠️ Marcenaria</td><td>Trabalhos manuais em madeira e móveis.</td></tr>
-      <tr><td>🚗 Mecânico de Carro</td><td>Manutenção e reparo de carros.</td></tr>
-      <tr><td>🚚 Mecânico de Caminhão e Carros Grandes</td><td>Manutenção de veículos pesados.</td></tr>
-      <tr><td>📊 Administração</td><td>Gestão de empresas, finanças e RH.</td></tr>
-      <tr><td>📦 Logística</td><td>Planejamento e transporte de mercadorias.</td></tr>
-      <tr><td>🏗️ Engenharia Civil</td><td>Construção e estruturação de obras e edifícios.</td></tr>
-      <tr><td>💾 Engenharia de Software</td><td>Desenvolvimento avançado de sistemas e aplicações.</td></tr>
-      <tr><td>🩺 Enfermagem</td><td>Cuidados e assistência de saúde.</td></tr>
-      <tr><td>🤖 Inteligência Artificial</td><td>Criação de sistemas inteligentes e automação.</td></tr>
-      <tr><td>🔌 Eletricista de Carro</td><td>Instalação e manutenção elétrica em veículos.</td></tr>
-      <tr><td>🔌 Eletricista de Casa</td><td>Instalação e manutenção elétrica residencial.</td></tr>
-      <tr><td>🔧 Chapeador de Carro</td><td>Reparo e pintura de carros.</td></tr>
-    </table>
-  </section>
+      <!-- SIGNIFICADOS -->
+      <section id="significados">
+        <h2>📘 Significado de Cada Curso</h2>
+        <table>
+          <tr><th>Curso</th><th>Descrição</th></tr>
+          <tr><td>💻 Desenvolvimento de Sistemas</td><td>Criação e manutenção de softwares e sites.</td></tr>
+          <tr><td>🛠️ Marcenaria</td><td>Trabalhos manuais em madeira e móveis.</td></tr>
+          <tr><td>🚗 Mecânico de Carro</td><td>Manutenção e reparo de carros.</td></tr>
+          <tr><td>🚚 Mecânico de Caminhão e Carros Grandes</td><td>Manutenção de veículos pesados.</td></tr>
+          <tr><td>📊 Administração</td><td>Gestão de empresas, finanças e RH.</td></tr>
+          <tr><td>📦 Logística</td><td>Planejamento e transporte de mercadorias.</td></tr>
+          <tr><td>🏗️ Engenharia Civil</td><td>Construção e estruturação de obras e edifícios.</td></tr>
+          <tr><td>💾 Engenharia de Software</td><td>Desenvolvimento avançado de sistemas e aplicações.</td></tr>
+          <tr><td>🩺 Enfermagem</td><td>Cuidados e assistência de saúde.</td></tr>
+          <tr><td>🤖 Inteligência Artificial</td><td>Criação de sistemas inteligentes e automação.</td></tr>
+          <tr><td>🔌 Eletricista de Carro</td><td>Instalação e manutenção elétrica em veículos.</td></tr>
+          <tr><td>🔌 Eletricista de Casa</td><td>Instalação e manutenção elétrica residencial.</td></tr>
+          <tr><td>🔧 Chapeador de Carro</td><td>Reparo e pintura de carros.</td></tr>
+        </table>
+      </section>
 
-  <!-- TABELA DE RESERVAS -->
-  <section id="tabela">
-    <div class="titulo-container">
-      <h2>📋 Tabela de Reservas</h2>
-    </div>
+      <!-- TABELA DE RESERVAS -->
+      <section id="tabela">
+        <h2>📋 Tabela de Reservas</h2>
+        <div class="filtros">
+          <select id="filtroCurso"></select>
+          <input type="date" id="filtroData"/>
+          <button onclick="aplicarFiltro()">Filtrar</button>
+          <button onclick="limparFiltro()">Limpar</button>
+        </div>
 
-    <div style="width:80%; margin:auto; display:flex; gap:10px; margin-bottom:10px;">
-      <select id="filtroCurso"></select>
-      <input type="date" id="filtroData"/>
-      <button onclick="aplicarFiltro()">Filtrar</button>
-      <button onclick="limparFiltro()">Limpar</button>
-    </div>
+        <table id="tabelaReservas">
+          <tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>
+        </table>
+      </section>
 
-    <table id="tabelaReservas">
-      <tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>
-    </table>
-  </section>
+      <!-- CONFIGURAÇÕES -->
+      <section id="config">
+        <h2>⚙️ Configurações do Sistema</h2>
+        <div class="config-opcoes">
+          <button onclick="aumentarFonte()">Aumentar Letras 🔍</button>
+          <button onclick="diminuirFonte()">Diminuir Letras 🔽</button>
+        </div>
 
-  <!-- CONFIGURAÇÕES -->
-  <section id="config">
-    <div class="titulo-container">
-      <h2>⚙️ Configurações do Sistema</h2>
-    </div>
-
-    <div class="config-opcoes">
-      <button onclick="aumentarFonte()">Aumentar Letras 🔍</button>
-      <button onclick="diminuirFonte()">Diminuir Letras 🔽</button>
-    </div>
-
-    <!-- Painel SQL -->
-    <div class="sql-box" id="sqlPainel">
-      <pre>
+        <div class="sql-box">
+<pre>
 CREATE OR REPLACE VIEW vw_usage_by_professor AS
 SELECT
     u.id AS professor_id,
@@ -163,16 +146,21 @@ LEFT JOIN reservations r
     ON r.professor_user_id = u.id
     AND r.status_id = 2
 WHERE u.role_id = (
-    SELECT id
-    FROM roles
-    WHERE name = 'professor'
-    LIMIT 1
+    SELECT id FROM roles WHERE name = 'professor' LIMIT 1
 )
 GROUP BY u.id;
-      </pre>
-    </div>
-  </section>
+</pre>
+        </div>
+      </section>
+    </main>
+  </div>
 
-  <script src="script.js"></script>
+  <script>
+    // Função para mostrar seções
+    function mostrar(id) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('ativo'));
+      document.getElementById(id).classList.add('ativo');
+    }
+  </script>
 </body>
 </html>
