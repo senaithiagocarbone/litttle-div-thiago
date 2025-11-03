@@ -13,26 +13,37 @@
   <!-- CONTAINER PRINCIPAL -->
   <div class="container">
 
-    <!-- MENU LATERAL -->
-    <aside class="menu-lateral">
-      <div class="retangulo-azul"></div>
-      <h2>Menu do Sistema</h2>
-      <button onclick="mostrar('formulario')">
-        🗓️ Formulário de Reserva
-      </button>
-      <button onclick="mostrar('relatorios')">
-        📊 Relatórios de Cursos
-      </button>
-      <button onclick="mostrar('significados')">
-        📘 Significado de Cada Curso
-      </button>
-      <button onclick="mostrar('tabela')">
-        📋 Tabela de Reservas
-      </button>
-      <button onclick="mostrar('config')">
-        ⚙️ Configurações
-      </button>
-    </aside>
+   <!-- MENU LATERAL -->
+<aside class="menu-lateral">
+  <div class="retangulo-azul"></div>
+  <h2>📚 Menu do Sistema</h2>
+
+  <button onclick="mostrar('formulario')">
+    <img src="https://cdn-icons-png.flaticon.com/512/747/747310.png" alt="Formulário">
+    <span>Formulário de Reserva</span>
+  </button>
+
+  <button onclick="mostrar('relatorios')">
+    <img src="https://cdn-icons-png.flaticon.com/512/1584/1584911.png" alt="Relatórios">
+    <span>Relatórios de Cursos</span>
+  </button>
+
+  <button onclick="mostrar('significados')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2232/2232688.png" alt="Significados">
+    <span>Significado de Cada Curso</span>
+  </button>
+
+  <button onclick="mostrar('tabela')">
+    <img src="https://cdn-icons-png.flaticon.com/512/2921/2921222.png" alt="Tabela">
+    <span>Tabela de Reservas</span>
+  </button>
+
+  <button onclick="mostrar('config')">
+    <img src="https://cdn-icons-png.flaticon.com/512/3524/3524639.png" alt="Configurações">
+    <span>Configurações</span>
+  </button>
+</aside>
+
 
     <!-- CONTEÚDO PRINCIPAL -->
     <main class="conteudo">
@@ -126,14 +137,16 @@
       </section>
 
       <!-- CONFIGURAÇÕES -->
-      <section id="config">
-        <h2>⚙️ Configurações do Sistema</h2>
-        <div class="config-opcoes">
-          <button onclick="aumentarFonte()">Aumentar Letras 🔍</button>
-          <button onclick="diminuirFonte()">Diminuir Letras 🔽</button>
-        </div>
+<section id="config">
+  <h2>⚙️ Configurações do Sistema</h2>
 
-        <div class="sql-box">
+  <div class="config-opcoes">
+  <button class="btn-config" onclick="aumentarFonte()">Aumentar Letras 🔍</button>
+  <button class="btn-config" onclick="diminuirFonte()">Diminuir Letras 🔽</button>
+</div>
+
+
+  <div class="sql-box">
 <pre>
 CREATE OR REPLACE VIEW vw_usage_by_professor AS
 SELECT
@@ -150,10 +163,9 @@ WHERE u.role_id = (
 )
 GROUP BY u.id;
 </pre>
-        </div>
-      </section>
-    </main>
   </div>
+</section>
+
 
   <script>
     // Função para mostrar seções

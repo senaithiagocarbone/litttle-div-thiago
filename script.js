@@ -1,7 +1,9 @@
-// MOSTRAR SEÇÕES
+// ======== MOSTRAR SEÇÕES ========
 function mostrar(secao) {
-  document.querySelectorAll('section').forEach(s => s.classList.remove('active'));
-  document.getElementById(secao).classList.add('active');
+  // Esconde todas as seções
+  document.querySelectorAll('section').forEach(s => s.classList.remove('ativo'));
+  // Mostra a seção selecionada
+  document.getElementById(secao).classList.add('ativo');
 
   const descricao = document.getElementById('descricaoBotao');
   switch (secao) {
@@ -21,12 +23,11 @@ function mostrar(secao) {
       break;
     case 'config':
       descricao.textContent = '⚙️ Este botão abre as configurações do sistema.';
-      document.getElementById('sqlPainel').classList.add('show');
       break;
   }
 }
 
-// DADOS DOS CURSOS
+// ======== DADOS DOS CURSOS ========
 const dadosCursos = {
   "Desenvolvimento de Sistemas": {prof: "Ricardo", turma:"A", bloco:"1", sala:"101", data:"2025-11-01", horario:"09:00"},
   "Marcenaria": {prof: "Ana", turma:"B", bloco:"2", sala:"202", data:"2025-11-02", horario:"10:00"},
@@ -43,49 +44,45 @@ const dadosCursos = {
   "Chapeador de Carro": {prof: "Rafael", turma:"M", bloco:"7", sala:"701", data:"2025-11-13", horario:"10:45"}
 };
 
-// FORMULÁRIO AUTOMÁTICO
+// ======== FORMULÁRIO AUTOMÁTICO ========
 const cursoSelect = document.getElementById("curso");
 cursoSelect.addEventListener("change", () => {
   const curso = cursoSelect.value;
   if (dadosCursos[curso]) {
-    document.getElementById("professor").value = dadosCursos[curso].prof;
-    document.getElementById("turma").value = dadosCursos[curso].turma;
-    document.getElementById("bloco").value = dadosCursos[curso].bloco;
-    document.getElementById("sala").value = dadosCursos[curso].sala;
-    document.getElementById("data").value = dadosCursos[curso].data;
-    document.getElementById("horario").value = dadosCursos[curso].horario;
+    const dados = dadosCursos[curso];
+    ["professor","turma","bloco","sala","data","horario"].forEach(id => {
+      document.getElementById(id).value = dados[id === "professor" ? "prof" : id];
+    });
   } else {
-    document.getElementById("professor").value = "";
-    document.getElementById("turma").value = "";
-    document.getElementById("bloco").value = "";
-    document.getElementById("sala").value = "";
-    document.getElementById("data").value = "";
-    document.getElementById("horario").value = "";
+    ["professor","turma","bloco","sala","data","horario"].forEach(id => document.getElementById(id).value = "");
   }
 });
 
-// RESERVAS
+// ======== RESERVAS ========
 let reservas = [];
 
-// ENVIO DO FORMULÁRIO
 document.getElementById("reservaForm").addEventListener("submit", function(e){
   e.preventDefault();
   const curso = cursoSelect.value;
   if (!curso) return;
-  const prof = document.getElementById("professor").value;
-  const turma = document.getElementById("turma").value;
-  const bloco = document.getElementById("bloco").value;
-  const sala = document.getElementById("sala").value;
-  const data = document.getElementById("data").value;
-  const horario = document.getElementById("horario").value;
 
-  reservas.push({curso, prof, turma, bloco, sala, data, horario});
+  const r = {
+    curso,
+    prof: document.getElementById("professor").value,
+    turma: document.getElementById("turma").value,
+    bloco: document.getElementById("bloco").value,
+    sala: document.getElementById("sala").value,
+    data: document.getElementById("data").value,
+    horario: document.getElementById("horario").value
+  };
+
+  reservas.push(r);
   atualizarTabela();
   alert("Reserva registrada com sucesso!");
   document.getElementById("reservaForm").reset();
 });
 
-// ATUALIZAR TABELA
+// ======== ATUALIZAR TABELA ========
 function atualizarTabela() {
   const tabela = document.getElementById("tabelaReservas");
   tabela.innerHTML = "<tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>";
@@ -97,12 +94,11 @@ function atualizarTabela() {
   popularFiltro();
 }
 
-// FILTRO
+// ======== FILTRO ========
 function popularFiltro() {
   const filtro = document.getElementById("filtroCurso");
   filtro.innerHTML = '<option value="">Todos os cursos</option>';
-  const cursosUnicos = [...new Set(reservas.map(r => r.curso))];
-  cursosUnicos.forEach(c => {
+  [...new Set(reservas.map(r => r.curso))].forEach(c => {
     const opt = document.createElement("option");
     opt.value = c;
     opt.textContent = c;
@@ -116,13 +112,13 @@ function aplicarFiltro() {
   const tabela = document.getElementById("tabelaReservas");
   tabela.innerHTML = "<tr><th>Curso</th><th>Professor</th><th>Turma</th><th>Bloco</th><th>Sala</th><th>Data</th><th>Horário</th></tr>";
 
-  reservas.filter(r => {
-    return (!cursoFiltro || r.curso === cursoFiltro) && (!dataFiltro || r.data === dataFiltro);
-  }).forEach(r => {
-    const tr = document.createElement("tr");
-    tr.innerHTML = `<td>${r.curso}</td><td>${r.prof}</td><td>${r.turma}</td><td>${r.bloco}</td><td>${r.sala}</td><td>${r.data}</td><td>${r.horario}</td>`;
-    tabela.appendChild(tr);
-  });
+  reservas
+    .filter(r => (!cursoFiltro || r.curso === cursoFiltro) && (!dataFiltro || r.data === dataFiltro))
+    .forEach(r => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td>${r.curso}</td><td>${r.prof}</td><td>${r.turma}</td><td>${r.bloco}</td><td>${r.sala}</td><td>${r.data}</td><td>${r.horario}</td>`;
+      tabela.appendChild(tr);
+    });
 }
 
 function limparFiltro() {
@@ -131,12 +127,28 @@ function limparFiltro() {
   atualizarTabela();
 }
 
-// AJUSTE DE FONTE
+// ======== AJUSTE DE FONTE GLOBAL ========
+const sistema = document.body;
 let tamanhoFonte = 16;
-function aumentarFonte() { tamanhoFonte += 2; document.body.style.fontSize = tamanhoFonte + "px"; }
-function diminuirFonte() { if (tamanhoFonte > 10) { tamanhoFonte -= 2; document.body.style.fontSize = tamanhoFonte + "px"; } }
 
-// GRÁFICO SIMPLES RELATÓRIOS
+function aplicarFonte() {
+  sistema.style.fontSize = tamanhoFonte + "px"; // transição no CSS fará a animação
+}
+
+function aumentarFonte() {
+  tamanhoFonte += 2;
+  aplicarFonte();
+}
+
+function diminuirFonte() {
+  tamanhoFonte -= 2;
+  aplicarFonte();
+}
+
+// Inicializa fonte
+aplicarFonte();
+
+// ======== GRÁFICO SIMPLES ========
 function renderizarGrafico() {
   const rel = document.getElementById("relatoriosConteudo");
   const resumo = {};
